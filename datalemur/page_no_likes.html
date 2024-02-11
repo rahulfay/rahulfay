@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Generic - Stellar by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<!-- <header id="header">
+						<h1>Cleaning Movie Data</h1>
+						<p>Learn Pandas</p>
+					</header> -->
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+						<section id="content" class="main">
+							<!-- <span class="image main"><img src="images/tyson-moultrie-BQTHOGNHo08-unsplash.jpg" alt="" /></span> -->
+							<h2>Page With No Likes [Facebook SQL Interview Question]</h2>
+								<h3>Study Case</h3>
+								<p>
+									Assume you're given two tables containing data about Facebook Pages and their respective likes (as in "Like a Facebook Page").
+									Write a query to return the IDs of the Facebook pages that have zero likes. The output should be sorted in ascending order based on the page IDs.
+								</p>
+								<h3>Example Tables</h3>
+								<h4>pages Table : </h4>
+								<div class="table-wrapper">
+									<table>
+										<thead>
+										  <tr>
+											<td>page_id</td>
+											<td>page_name</td>
+										  </tr>
+										</thead>
+										<tbody>
+										  <tr>
+											<td>20001</td>
+											<td>SQL Solutions</td>
+										  </tr>
+										  <tr>
+											<td>20045</td>
+											<td>Brain Exercises</td>
+										  </tr>
+										  <tr>
+											<td>20701</td>
+											<td>Tips for Data Analysts</td>
+										  </tr>
+										</tbody>
+									  </table>
+								</div>
+								<h4>page_likes Table : </h4>
+								<div class="table-wrapper">
+									<table>
+										<thead>
+										  <tr>
+											<td>page_id</td>
+											<td>page_name</td>
+										  </tr>
+										</thead>
+										<tbody>
+										  <tr>
+											<td>20001</td>
+											<td>SQL Solutions</td>
+										  </tr>
+										  <tr>
+											<td>20045</td>
+											<td>Brain Exercises</td>
+										  </tr>
+										  <tr>
+											<td>20701</td>
+											<td>Tips for Data Analysts</td>
+										  </tr>
+										</tbody>
+									  </table>
+								</div>
+								<h3>Query</h3>
+								<pre><code>SELECT pages.page_id
+FROM pages
+LEFT JOIN page_likes ON pages.page_id = page_likes.page_id
+WHERE liked_date ISNULL
+ORDER BY pages.page_id ASC</code></pre>
+								<h3>Result</h3>
+								<div class="table-wrapper">
+									<table>
+										<thead>
+										  <tr>
+											<td>page_id</td>
+										  </tr>
+										</thead>
+										<tbody>
+										  <tr>
+											<td>20701</td>
+										  </tr>
+										  <tr>
+											<td>32728</td>
+										  </tr>
+										</tbody>
+									  </table>
+								</div>
+								<a href="../mainQuerry.html" class="button primary">Back</a>		  
+							</section>
+							
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; 2024 <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrollex.min.js"></script>
+			<script src="../assets/js/jquery.scrolly.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>

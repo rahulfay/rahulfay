@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Generic - Stellar by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<!-- <header id="header">
+						<h1>Cleaning Movie Data</h1>
+						<p>Learn Pandas</p>
+					</header> -->
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+						<section id="content" class="main">
+							<!-- <span class="image main"><img src="images/tyson-moultrie-BQTHOGNHo08-unsplash.jpg" alt="" /></span> -->
+							<h2>Unfinished Parts [Tesla SQL Interview Question]</h2>
+								<h3>Study Case</h3>
+								<p>
+									Tesla is investigating production bottlenecks and they need your help to extract the relevant data. Write a query to determine which parts have begun the assembly process but are not yet finished.
+Assumptions:
+
+parts_assembly table contains all parts currently in production, each at varying stages of the assembly process.
+An unfinished part is one that lacks a finish_date.
+This question is straightforward, so let's approach it with simplicity in both thinking and solution.
+								</p>
+								<h3>Example Tables</h3>
+								<div class="table-wrapper">
+									<table border="1">
+										<thead>
+										  <tr>
+											<td>part</td>
+											<td>finish_date</td>
+											<td>assembly_step</td>
+										  </tr>
+										</thead>
+										<tbody>
+										  <tr>
+											<td>battery</td>
+											<td>01/22/2022 00:00:00</td>
+											<td>1</td>
+										  </tr>
+										  <tr>
+											<td>battery</td>
+											<td>02/22/2022 00:00:00</td>
+											<td>2</td>
+										  </tr>
+										  <tr>
+											<td>battery</td>
+											<td>03/22/2022 00:00:00</td>
+											<td>3</td>
+										  </tr>
+										  <tr>
+											<td>bumper</td>
+											<td>01/22/2022 00:00:00</td>
+											<td>1</td>
+										  </tr>
+										  <tr>
+											<td>bumper</td>
+											<td>02/22/2022 00:00:00</td>
+											<td>2</td>
+										  </tr>
+										  <tr>
+											<td>bumper</td>
+											<td></td>
+											<td>3</td>
+										  </tr>
+										  <tr>
+											<td>bumper</td>
+											<td></td>
+											<td>4</td>
+										  </tr>
+										</tbody>
+									  </table>									  
+								</div>
+								<h3>Query</h3>
+								<pre><code>SELECT part, assembly_step FROM parts_assembly
+WHERE finish_date ISNULL</code></pre>
+								<h3>Result</h3>
+								<div class="table-wrapper">
+									<table border="1">
+										<thead>
+										  <tr>
+											<td>part</td>
+											<td>assembly_step</td>
+										  </tr>
+										</thead>
+										<tbody>
+										  <tr>
+											<td>bumper</td>
+											<td>3</td>
+										  </tr>
+										  <tr>
+											<td>bumper</td>
+											<td>4</td>
+										  </tr>
+										  <tr>
+											<td>engine</td>
+											<td>5</td>
+										  </tr>
+										</tbody>
+									  </table>									  
+								</div>
+								<a href="../mainQuerry.html" class="button primary">Back</a>		  
+							</section>
+							
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; 2024 <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrollex.min.js"></script>
+			<script src="../assets/js/jquery.scrolly.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Generic - Stellar by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<!-- <header id="header">
+						<h1>Cleaning Movie Data</h1>
+						<p>Learn Pandas</p>
+					</header> -->
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+						<section id="content" class="main">
+							<!-- <span class="image main"><img src="images/tyson-moultrie-BQTHOGNHo08-unsplash.jpg" alt="" /></span> -->
+							<h2>Pharmacy Analytics (Part 3) [CVS Health SQL Interview Question]</h2>
+								<h3>Study Case</h3>
+								<p>
+									CVS Health wants to gain a clearer understanding of its pharmacy sales and the performance of various products.
+
+									Write a query to calculate the total drug sales for each manufacturer. Round the answer to the nearest million and report your results in descending order of total sales. In case of any duplicates, sort them alphabetically by the manufacturer name.
+
+									Since this data will be displayed on a dashboard viewed by business stakeholders, please format your results as follows: "$36 million".
+								</p>
+								<h3>Example Tables</h3>
+								<div class="table-wrapper">
+									<table border="1">
+										<thead>
+										  <tr>
+											<td>product_id</td>
+											<td>units_sold</td>
+											<td>total_sales</td>
+											<td>cogs</td>
+											<td>manufacturer</td>
+											<td>drug</td>
+										  </tr>
+										</thead>
+										<tbody>
+										  <tr>
+											<td>94</td>
+											<td>132362</td>
+											<td>2041758.41</td>
+											<td>1373721.70</td>
+											<td>Biogen</td>
+											<td>UP and UP</td>
+										  </tr>
+										  <tr>
+											<td>9</td>
+											<td>37410</td>
+											<td>293452.54</td>
+											<td>208876.01</td>
+											<td>Eli Lilly</td>
+											<td>Zyprexa</td>
+										  </tr>
+										  <tr>
+											<td>50</td>
+											<td>90484</td>
+											<td>2521023.73</td>
+											<td>2742445.9</td>
+											<td>Eli Lilly</td>
+											<td>Dermasorb</td>
+										  </tr>
+										  <tr>
+											<td>61</td>
+											<td>77023</td>
+											<td>500101.61</td>
+											<td>419174.97</td>
+											<td>Biogen</td>
+											<td>Varicose Relief</td>
+										  </tr>
+										  <tr>
+											<td>136</td>
+											<td>144814</td>
+											<td>1084258.00</td>
+											<td>1006447.73</td>
+											<td>Biogen</td>
+											<td>Burkhart</td>
+										  </tr>
+										</tbody>
+									  </table>																											
+								</div>
+								<h3>Query</h3>
+								<pre><code>SELECT manufacturer, CONCAT('$',ROUND(SUM(total_sales)*0.000001,0),' million') as sale
+FROM pharmacy_sales
+GROUP BY manufacturer
+ORDER BY sum(total_sales) desc
+</code></pre>
+								<h3>Result</h3>
+								<div class="table-wrapper">
+									<table border="1">
+										<thead>
+										  <tr>
+											<td>manufacturer</td>
+											<td>sale</td>
+										  </tr>
+										</thead>
+										<tbody>
+										  <tr>
+											<td>AbbVie</td>
+											<td>$114 million</td>
+										  </tr>
+										  <tr>
+											<td>Eli Lilly</td>
+											<td>$77 million</td>
+										  </tr>
+										  <tr>
+											<td>Biogen</td>
+											<td>$70 million</td>
+										  </tr>
+										  <tr>
+											<td>Johnson & Johnson</td>
+											<td>$43 million</td>
+										  </tr>
+										  <tr>
+											<td>Bayer</td>
+											<td>$34 million</td>
+										  </tr>
+										  <tr>
+											<td>AstraZeneca</td>
+											<td>$32 million</td>
+										  </tr>
+										  <tr>
+											<td>Pfizer</td>
+											<td>$28 million</td>
+										  </tr>
+										  <tr>
+											<td>Novartis</td>
+											<td>$26 million</td>
+										  </tr>
+										  <tr>
+											<td>Sanofi</td>
+											<td>$25 million</td>
+										  </tr>
+										  <tr>
+											<td>Merck</td>
+											<td>$25 million</td>
+										  </tr>
+										  <tr>
+											<td>Roche</td>
+											<td>$16 million</td>
+										  </tr>
+										  <tr>
+											<td>GlaxoSmithKline</td>
+											<td>$4 million</td>
+										  </tr>
+										</tbody>
+									  </table>										  
+								</div>
+								<a href="mainQuerry.html" class="button primary">Back</a>		  
+							</section>				
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; 2024 <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrollex.min.js"></script>
+			<script src="../assets/js/jquery.scrolly.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>

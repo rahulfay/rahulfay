@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Generic - Stellar by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<!-- <header id="header">
+						<h1>Cleaning Movie Data</h1>
+						<p>Learn Pandas</p>
+					</header> -->
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+						<section id="content" class="main">
+							<!-- <span class="image main"><img src="../images/tyson-moultrie-BQTHOGNHo08-unsplash.jpg" alt="" /></span> -->
+							<h2>Cities With Completed Trades [Robinhood SQL Interview Question]</h2>
+								<h3>Study Case</h3>
+								<p>
+									Assume you're given the tables containing completed trade orders and user details in a Robinhood trading system.
+									Write a query to retrieve the top three cities that have the highest number of completed trade orders listed in descending order. Output the city name and the corresponding number of completed trade orders.
+								</p>
+								<h3>Example Tables</h3>
+								<h4>trades Table :</h4>
+								<div class="table-wrapper">
+									<table border="1">
+										<thead>
+										  <tr>
+											<td>order_id</td>
+											<td>user_id</td>
+											<td>price</td>
+											<td>quantity</td>
+											<td>status</td>
+											<td>timestamp</td>
+										  </tr>
+										</thead>
+										<tbody>
+										  <tr>
+											<td>100101</td>
+											<td>111</td>
+											<td>9.80</td>
+											<td>10</td>
+											<td>Cancelled</td>
+											<td>08/17/2022 12:00:00</td>
+										  </tr>
+										  <tr>
+											<td>100102</td>
+											<td>111</td>
+											<td>10.00</td>
+											<td>10</td>
+											<td>Completed</td>
+											<td>08/17/2022 12:00:00</td>
+										  </tr>
+										  <tr>
+											<td>100259</td>
+											<td>148</td>
+											<td>5.10</td>
+											<td>35</td>
+											<td>Completed</td>
+											<td>08/25/2022 12:00:00</td>
+										  </tr>
+										  <tr>
+											<td>100264</td>
+											<td>148</td>
+											<td>4.80</td>
+											<td>40</td>
+											<td>Completed</td>
+											<td>08/26/2022 12:00:00</td>
+										  </tr>
+										  <tr>
+											<td>100305</td>
+											<td>300</td>
+											<td>10.00</td>
+											<td>15</td>
+											<td>Completed</td>
+											<td>09/05/2022 12:00:00</td>
+										  </tr>
+										  <tr>
+											<td>100400</td>
+											<td>178</td>
+											<td>9.90</td>
+											<td>15</td>
+											<td>Completed</td>
+											<td>09/09/2022 12:00:00</td>
+										  </tr>
+										  <tr>
+											<td>100565</td>
+											<td>265</td>
+											<td>25.60</td>
+											<td>5</td>
+											<td>Completed</td>
+											<td>12/19/2022 12:00:00</td>
+										  </tr>
+										</tbody>
+									  </table>									  
+								</div>
+								<h4>trades Table :</h4>
+								<div class="table-wrapper">
+									<table border="1">
+										<thead>
+										  <tr>
+											<td>user_id</td>
+											<td>city</td>
+											<td>email</td>
+											<td>signup_date</td>
+										  </tr>
+										</thead>
+										<tbody>
+										  <tr>
+											<td>111</td>
+											<td>San Francisco</td>
+											<td>rrok10@gmail.com</td>
+											<td>08/03/2021 12:00:00</td>
+										  </tr>
+										  <tr>
+											<td>148</td>
+											<td>Boston</td>
+											<td>sailor9820@gmail.com</td>
+											<td>08/20/2021 12:00:00</td>
+										  </tr>
+										  <tr>
+											<td>178</td>
+											<td>San Francisco</td>
+											<td>harrypotterfan182@gmail.com</td>
+											<td>01/05/2022 12:00:00</td>
+										  </tr>
+										  <tr>
+											<td>265</td>
+											<td>Denver</td>
+											<td>shadower_@hotmail.com</td>
+											<td>02/26/2022 12:00:00</td>
+										  </tr>
+										  <tr>
+											<td>300</td>
+											<td>San Francisco</td>
+											<td>houstoncowboy1122@hotmail.com</td>
+											<td>06/30/2022 12:00:00</td>
+										  </tr>
+										</tbody>
+									  </table>									  
+								</div>
+								<h3>Query</h3>
+								<pre><code>SELECT city, SUM(CASE WHEN status = 'Completed' THEN 1 ELSE 0 END) AS TOTAL 
+FROM trades
+JOIN users
+	ON trades.user_id=users.user_id
+GROUP BY city
+ORDER BY TOTAL DESC
+LIMIT 3</code></pre>
+								<h3>Result</h3>
+								<div class="table-wrapper">
+									<table border="1">
+										<thead>
+										  <tr>
+											<td>city</td>
+											<td>total</td>
+										  </tr>
+										</thead>
+										<tbody>
+										  <tr>
+											<td>San Francisco</td>
+											<td>4</td>
+										  </tr>
+										  <tr>
+											<td>Boston</td>
+											<td>3</td>
+										  </tr>
+										  <tr>
+											<td>Denver</td>
+											<td>2</td>
+										  </tr>
+										</tbody>
+									  </table>									  
+								</div>
+								<a href="../mainQuerry.html" class="button primary">Back</a>		  
+							</section>				
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; 2024 <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrollex.min.js"></script>
+			<script src="../assets/js/jquery.scrolly.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>

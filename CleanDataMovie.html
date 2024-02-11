@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Generic - Stellar by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>Cleaning Movie Data</h1>
+						<p>Learn Pandas</p>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+							<section id="content" class="main">
+								<span class="image main"><img src="images/tyson-moultrie-BQTHOGNHo08-unsplash.jpg" alt="" /></span>
+								<h2>About Datasets</h2>
+								<p>
+									This data was obtained by Bharat Natrayn by scrapping data from IMDB top Netflix movies and TV shows. This dataset has 9 columns with the following details:
+								</p>
+								<ul>
+									<li>MOVIES</li>
+									<li>YEARS</li>
+									<li>GENRE</li>
+									<li>RATING</li>
+									<li>ONE-LINE</li>
+									<li>STARS</li>
+									<li>VOTES</li>
+									<li>RUNTIME</li>
+									<li>GROSS</li>
+								</ul>
+								<h2>PROCESS CLEANING DATA</h2>
+								<p>The first step is to import the Pandas library which will be used to help with the data cleaning process. Because I did this using Google Colab, I connected to the drive to access the dataset.</p>
+								<pre><code>from google.colab import drive
+drive.mount('/content/drive')</code></pre>
+								<p>After connecting to Drive, read the csv file using function <code>read_csv("file_location")</code>The following is an example of its use.</p>
+								<pre><code>df = pd.read_csv("/content/drive/MyDrive/Portofolio/movies.csv")</code></pre>
+								<p>Let's see what the existing dataset looks like by using <code>head()</code>to look at some rows</p>
+								<pre><code>df.head()</code></pre>
+								<div class="col-12"><span class="image fit"><img src="images/head_data.jpg" alt="" /></span></div>
+								<p>It can be seen that there is some data that has the same format, there is empty data, and also twin data.</p>
+								<h3>Remove Duplicate Data</h3>
+								<p>We want to make sure that there are no duplicate films by checking the title and year of release using <code>drop_duplicates()</code> function. Before deleting twin data, clean the whitespace in the "MOVIES" column. To remove unwanted characters, you can use the <code>strip()</code> function.</p>
+								<pre><code>df["MOVIES"] = df["MOVIES"].str.rstrip(' ')
+df["MOVIES"] = df["MOVIES"].str.lstrip(' ')</code></pre>
+								<p>Next, delete the rows that have the same movie name and release year.</p>
+								<pre><code>df = df.drop_duplicates(subset=["MOVIES", "YEAR"], keep="first")</code></pre>
+								<p><code>keep="first"</code>indicates that the first data in the twin data will be retained</p>
+								<h3>Reformating Data</h3>
+								<p>It can be seen in the "YEAR" column that the writing format is not appropriate. Let's change it to the year of the film's release. First, we delete all characters that are not numbers in the following way.</p>
+								<pre><code>df["YEAR"] = df["YEAR"].str.replace('[^0-9]','')</code></pre>
+								<div class="col-12"><span class="image fit"><img src="images/reformat1.jpg" alt="" /></span></div>
+								<p>In the "YEAR" column, characters other than numbers have been deleted. However, we can see that in index 2, there are 8 digit numbers. Where the first 4 digits are the year of release for the first series. We will take the 4 numbers in front.</p>
+								<pre><code>df["YEAR"] = df["YEAR"].str[0:4]</code></pre>
+								<p>Now the "YEAR" column has the same format</p>
+								<div class="col-12"><span class="image fit"><img src="images/reformat2.jpg" alt="" /></span></div>
+								<h3>Split Data</h3>
+								<p>In the "STARS" column the name of the director and stars are still one. To separate the data into separate columns, the <code>split()</code> function can be used. Before that, let's first clean the column from whitespace.</p>
+								<pre><code>df = df.replace(r"\n"," ",regex=True)
+df["STARS"] = df["STARS"].str.lstrip(" ")</code></pre>
+								<p>Next, we separate the data and create 2 new columns.</p>
+								<pre><code>df[["Directors","Stars"]] = df["STARS"].str.split("Stars:",1,expand=True)</code></pre>
+								<div class="col-12"><span class="image fit"><img src="images/splitdata1.jpg" alt="" /></span></div>
+								<p>Now 2 new columns, each containing directors and stars, have been added.</p>
+								<p>Let's delete the "STARS" column with function <code>drop()</code> and tidy up the data in the "Directors" column</p>
+								<pre><code>df["Directors"] = df["Directors"].str.lstrip("Director: ")
+df["Directors"] = df["Directors"].str.rstrip(" |")
+df = df.drop(columns="STARS")</code></pre>
+								<h3>Change Data Type</h3>
+								<p>In order to process the data in the "VOTES" and "RATING" columns, it needs to be changed to an integer data type. we can use functions <code>astype()</code></p>
+								<pre><code>df["VOTES"] = df["VOTES"].str.replace(",",".")
+df["VOTES"] = df["VOTES"].str.replace(".","")
+df["VOTES"] = df["VOTES"].fillna("0")
+df["VOTES"] = df["VOTES"].astype(int)
+
+df["RATING"] = df["RATING"].astype(float)
+df["RATING"] = df["RATING"].fillna("0")</code></pre>
+								<h3>Clean N/A Value</h3>
+								<p>we change every N/A value to blank using <code>fillna()</code> function</p>
+								<pre><code>df = df.fillna("")</code></pre>
+								<div class="col-12"><span class="image fit"><img src="images/result.jpg" alt="" /></span></div>
+								<p>Now we have data that is clean and ready to be used for analysis or machine learning datasets.</p>
+							</section>
+							
+
+					</div>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<!-- <section>
+						<h2>Aliquam sed mauris</h2>
+						<p>Sed lorem ipsum dolor sit amet et nullam consequat feugiat consequat magna adipiscing tempus etiam dolore veroeros. eget dapibus mauris. Cras aliquet, nisl ut viverra sollicitudin, ligula erat egestas velit, vitae tincidunt odio.</p>
+						<ul class="actions">
+							<li><a href="generic.html" class="button">Learn More</a></li>
+						</ul>
+					</section> -->
+					<section>
+						<h2>Let's Connect With Me</h2>
+						<!-- <dl class="alt">
+							<dt>Address</dt>
+							<dd>1234 Somewhere Road &bull; Nashville, TN 00000 &bull; USA</dd>
+							<dt>Phone</dt>
+							<dd>(000) 000-0000 x 0000</dd>
+							<dt>Email</dt>
+							<dd><a href="#">information@untitled.tld</a></dd>
+						</dl> -->
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/rahulfajri/" class="icon brands fa-linkedin alt"><span class="label">Twitter</span></a></li>
+							<li><a href="https://instagram.com/rahul.15511" class="icon brands fa-instagram alt"><span class="label">Instagram</span></a></li>
+							<li><a href="https://github.com/rahulfay" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
+						</ul>
+					</section>
+					<p class="copyright">&copy; 2024 Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+				</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

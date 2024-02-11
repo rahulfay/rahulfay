@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Generic - Stellar by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<!-- <header id="header">
+						<h1>Cleaning Movie Data</h1>
+						<p>Learn Pandas</p>
+					</header> -->
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+						<section id="content" class="main">
+							<!-- <span class="image main"><img src="images/tyson-moultrie-BQTHOGNHo08-unsplash.jpg" alt="" /></span> -->
+							<h2>Pharmacy Analytics (Part 2) [CVS Health SQL Interview Question]</h2>
+								<h3>Study Case</h3>
+								<p>
+									CVS Health is analyzing its pharmacy sales data, and how well different products are selling in the market. Each drug is exclusively manufactured by a single manufacturer.
+									Write a query to identify the manufacturers associated with the drugs that resulted in losses for CVS Health and calculate the total amount of losses incurred.
+									Output the manufacturer's name, the number of drugs associated with losses, and the total losses in absolute value. Display the results sorted in descending order with the highest losses displayed at the top.
+								</p>
+								<h3>Example Tables</h3>
+								<div class="table-wrapper">
+									<table border="1">
+										<thead>
+										  <tr>
+											<td>product_id</td>
+											<td>units_sold</td>
+											<td>total_sales</td>
+											<td>cogs</td>
+											<td>manufacturer</td>
+											<td>drug</td>
+										  </tr>
+										</thead>
+										<tbody>
+										  <tr>
+											<td>156</td>
+											<td>89514</td>
+											<td>3130097.00</td>
+											<td>3427421.73</td>
+											<td>Biogen</td>
+											<td>Acyclovir</td>
+										  </tr>
+										  <tr>
+											<td>25</td>
+											<td>222331</td>
+											<td>2753546.00</td>
+											<td>2974975.36</td>
+											<td>AbbVie</td>
+											<td>Lamivudine and Zidovudine</td>
+										  </tr>
+										  <tr>
+											<td>50</td>
+											<td>90484</td>
+											<td>2521023.73</td>
+											<td>2742445.90</td>
+											<td>Eli Lilly</td>
+											<td>Dermasorb TA Complete Kit</td>
+										  </tr>
+										  <tr>
+											<td>98</td>
+											<td>110746</td>
+											<td>813188.82</td>
+											<td>140422.87</td>
+											<td>Biogen</td>
+											<td>Medi-Chord</td>
+										  </tr>
+										</tbody>
+									  </table>																		  
+								</div>
+								<h3>Query</h3>
+								<pre><code>SELECT manufacturer, COUNT(drug), ABS(SUM(total_sales-cogs)) as total_losses
+FROM pharmacy_sales
+WHERE total_sales-cogs < 0
+GROUP BY manufacturer
+ORDER BY 3 DESC
+</code></pre>
+								<h3>Result</h3>
+								<div class="table-wrapper">
+									<table border="1">
+										<thead>
+										  <tr>
+											<td>manufacturer</td>
+											<td>count</td>
+											<td>total_losses</td>
+										  </tr>
+										</thead>
+										<tbody>
+										  <tr>
+											<td>Johnson & Johnson</td>
+											<td>6</td>
+											<td>894913.13</td>
+										  </tr>
+										  <tr>
+											<td>Eli Lilly</td>
+											<td>4</td>
+											<td>447352.90</td>
+										  </tr>
+										  <tr>
+											<td>Biogen</td>
+											<td>3</td>
+											<td>417018.89</td>
+										  </tr>
+										  <tr>
+											<td>AbbVie</td>
+											<td>2</td>
+											<td>413991.10</td>
+										  </tr>
+										  <tr>
+											<td>Roche</td>
+											<td>2</td>
+											<td>159741.62</td>
+										  </tr>
+										  <tr>
+											<td>Bayer</td>
+											<td>1</td>
+											<td>28785.28</td>
+										  </tr>
+										</tbody>
+									  </table>																			
+								</div>
+								<a href="../mainQuerry.html" class="button primary">Back</a>		  
+							</section>				
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; 2024 <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrollex.min.js"></script>
+			<script src="../assets/js/jquery.scrolly.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
